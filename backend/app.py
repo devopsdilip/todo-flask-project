@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+import json
+
 # Updated in Dilip branch
 app = Flask(__name__)
 
-# Sample in-memory data (later you’ll replace with DB)
+# Sample in-memory data
 students = []
 
 # ------------------------
@@ -33,6 +35,7 @@ def version():
 # ------------------------
 @app.route("/students", methods=["POST"])
 def add_student():
+
     data = request.get_json()
 
     student = {
@@ -54,6 +57,7 @@ def add_student():
 # ------------------------
 @app.route("/students", methods=["GET"])
 def get_students():
+
     return jsonify({
         "count": len(students),
         "students": students
@@ -61,14 +65,32 @@ def get_students():
 
 
 # ------------------------
+# JSON API
+# ------------------------
+@app.route("/api", methods=["GET"])
+def api():
+
+    with open("data/students.json", "r") as file:
+        data = json.load(file)
+
+    return jsonify(data), 200
+
+
+# ------------------------
 # Root
 # ------------------------
 @app.route("/")
 def home():
+
     return jsonify({
         "message": "Backend API is running"
     })
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True
+    )
+
