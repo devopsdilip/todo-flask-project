@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Todo Page</title>
+    <title>Todo Page</title>
 </head>
 
 <body>
@@ -10,51 +10,61 @@
 
 <form action="/submit" method="POST">
 
-<label>Item Name</label><br>
-<input type="text" name="itemName">
+    <label>Item ID</label><br>
+    <input 
+        type="text"
+        name="itemId"
+        required
+    >
+    <br><br>
 
-<br><br>
 
-<label>Item Description</label><br>
-<textarea name="itemDescription"></textarea>
+    <label>Item UUID</label><br>
+    <input 
+        type="text"
+        name="itemUUID"
+        required
+    >
+    <br><br>
 
-<br><br>
 
-<button type="submit">
-Submit
-</button>
+    <label>Item Hash</label><br>
+    <input 
+        type="text"
+        name="itemHash"
+        required
+    >
+    <br><br>
+
+
+    <label>Item Name</label><br>
+    <input 
+        type="text"
+        name="itemName"
+        required
+    >
+    <br><br>
+
+
+    <label>Item Description</label><br>
+
+    <textarea
+        name="itemDescription"
+        rows="5"
+        cols="40"
+        required
+    ></textarea>
+
+    <br><br>
+
+
+    <button type="submit">
+        Submit
+    </button>
+
 
 </form>
 
-<label>Item ID</label><br>
-
-<input 
-type="text"
-name="itemId"
-required
->
-
-<br><br>
-
-<label>Item UUID</label><br>
-
-<input 
-type="text"
-name="itemUUID"
-required
->
-
-<br><br>
-
-<label>Item Hash</label><br>
-
-<input 
-type="text"
-name="itemHash"
-required
->
-
-<br><br>
 
 </body>
 </html>
