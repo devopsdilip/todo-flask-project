@@ -1,0 +1,105 @@
+{
+    "tasks": [
+        {
+            "attachments": [
+                {
+                    "id": "ab364514-c0a5-43c5-b557-cb906dbb119e",
+                    "type": "ElasticNetworkInterface",
+                    "status": "DELETED",
+                    "details": [
+                        {
+                            "name": "subnetId",
+                            "value": "subnet-03072c4aa2899b691"
+                        },
+                        {
+                            "name": "networkInterfaceId",
+                            "value": "eni-04c87abf63a8ddf3f"
+                        },
+                        {
+                            "name": "macAddress",
+                            "value": "02:27:18:c1:20:b5"
+                        },
+                        {
+                            "name": "privateDnsName",
+                            "value": "ip-10-0-1-74.ap-south-1.compute.internal"
+                        },
+                        {
+                            "name": "privateIPv4Address",
+                            "value": "10.0.1.74"
+                        }
+                    ]
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "ap-south-1a",
+            "clusterArn": "arn:aws:ecs:ap-south-1:327481844909:cluster/fullstack-cluster-v2",
+            "connectivity": "CONNECTED",
+            "connectivityAt": "2026-06-30T17:21:23.677000+00:00",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:ap-south-1:327481844909:container/fullstack-cluster-v2/07cdbea03be643c9a7ae977a8686445b/347b16a4-87fe-4e7a-ac79-2a2dc7ae5582",
+                    "taskArn": "arn:aws:ecs:ap-south-1:327481844909:task/fullstack-cluster-v2/07cdbea03be643c9a7ae977a8686445b",
+                    "name": "frontend",
+                    "image": "327481844909.dkr.ecr.ap-south-1.amazonaws.com/frontend-v2:latest",
+                    "imageDigest": "sha256:08647d88b655a6aff7f5783800adc801d991e6f4a3af8af36a6d1137c2f17f39",
+                    "runtimeId": "07cdbea03be643c9a7ae977a8686445b-3860412285",
+                    "lastStatus": "STOPPED",
+                    "exitCode": 1,
+                    "networkBindings": [],
+                    "networkInterfaces": [
+                        {
+                            "attachmentId": "ab364514-c0a5-43c5-b557-cb906dbb119e",
+                            "privateIpv4Address": "10.0.1.74"
+                        }
+                    ],
+                    "healthStatus": "UNKNOWN",
+                    "cpu": "0"
+                }
+            ],
+            "cpu": "256",
+            "createdAt": "2026-06-30T17:21:19.579000+00:00",
+            "desiredStatus": "STOPPED",
+            "enableExecuteCommand": false,
+            "executionStoppedAt": "2026-06-30T17:21:56.950000+00:00",
+            "group": "service:frontend-service-v2",
+            "healthStatus": "UNKNOWN",
+            "lastStatus": "STOPPED",
+            "launchType": "FARGATE",
+            "memory": "512",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "frontend"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "platformVersion": "1.4.0",
+            "platformFamily": "Linux",
+            "pullStartedAt": "2026-06-30T17:21:29.757000+00:00",
+            "pullStoppedAt": "2026-06-30T17:21:47.400000+00:00",
+            "startedAt": "2026-06-30T17:22:00.246000+00:00",
+            "startedBy": "ecs-svc/6574674639332657799",
+            "stopCode": "EssentialContainerExited",
+            "stoppedAt": "2026-06-30T17:27:31.531000+00:00",
+            "stoppedReason": "Essential container in task exited",
+            "stoppingAt": "2026-06-30T17:22:06.980000+00:00",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:ap-south-1:327481844909:task/fullstack-cluster-v2/07cdbea03be643c9a7ae977a8686445b",
+            "taskDefinitionArn": "arn:aws:ecs:ap-south-1:327481844909:task-definition/frontend-task-v2:1",
+            "version": 6,
+            "ephemeralStorage": {
+                "sizeInGiB": 20
+            },
+            "fargateEphemeralStorage": {
+                "sizeInGiB": 20
+            }
+        }
+    ],
+    "failures": []
+}

@@ -1,0 +1,36 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "frontend",
+      "image": "327481844909.dkr.ecr.ap-south-1.amazonaws.com/frontend-v3:406011e393605feef5193786f20384b901111deb",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "BACKEND_URL",
+          "value": "http://fullstack-alb-v3-8216980.ap-south-1.elb.amazonaws.com"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
+    }
+  ],
+  "family": "frontend-task",
+  "executionRoleArn": "arn:aws:iam::327481844909:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}

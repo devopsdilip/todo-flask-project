@@ -1,0 +1,9 @@
+<h1>Student Dashboard</h1>
+
+<a href="/register">Add Student</a>
+
+<ul>
+  <% students.forEach(s => { %>
+    <li><%= s.name %> - <%= s.email %></li>
+  <% }) %>
+</ul>

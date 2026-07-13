@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  backend:
+    image: flask-backend:v1
+    build: ./backend
+    ports:
+      - "5000:5000"
+
+  frontend:
+    image: express-frontend:v1
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend
