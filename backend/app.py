@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-
+# Updated in Dilip branch
 app = Flask(__name__)
 
 # Sample in-memory data (later you’ll replace with DB)
@@ -13,7 +13,7 @@ def health():
     return jsonify({
         "status": "healthy",
         "service": "backend",
-        "version": "1.0.0"
+        "version": "1.0.1"
     }), 200
 
 
@@ -23,7 +23,7 @@ def health():
 @app.route("/version", methods=["GET"])
 def version():
     return jsonify({
-        "version": "1.0.0",
+        "version": "1.0.1",
         "environment": "development"
     }), 200
 
