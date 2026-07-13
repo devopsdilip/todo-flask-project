@@ -1,54 +1,63 @@
 from flask import Flask, jsonify, request
 from pymongo import MongoClient
 import json
+import os
 
 app = Flask(__name__)
 
-# ------------------------
+
+# =========================
 # MongoDB Connection
-# ------------------------
+# =========================
 
 client = MongoClient(
     "mongodb://admin:admin123@localhost:27017/?authSource=admin"
 )
 
 db = client["todo_db"]
+
 todo_collection = db["todo_items"]
 
-# ------------------------
-# Sample student data
-# ------------------------
+
+# =========================
+# Sample Student Data
+# =========================
 
 students = []
 
-# ------------------------
-# Health Check
-# ------------------------
 
-@app.route("/health")
+# =========================
+# Health Check
+# =========================
+
+@app.route("/health", methods=["GET"])
 def health():
 
     return jsonify({
         "status": "healthy",
         "service": "backend",
         "version": "1.0.0"
-    })
+    }), 200
 
-# ------------------------
+
+
+# =========================
 # Version
-# ------------------------
+# =========================
 
-@app.route("/version")
+@app.route("/version", methods=["GET"])
 def version():
 
     return jsonify({
         "version": "1.0.0",
         "environment": "development"
-    })
+    }), 200
 
-# ------------------------
-# Add Student
-# ------------------------
+
+
+# =========================
+# Students POST
+# =========================
 
 @app.route("/students", methods=["POST"])
 def add_student():
@@ -56,95 +65,153 @@ def add_student():
     data = request.get_json()
 
     student = {
-        "id": len(students) + 1,
+
+        "id": len(students)+1,
         "name": data.get("name"),
         "email": data.get("email")
+
     }
 
     students.append(student)
 
+
     return jsonify({
-        "message": "Student added successfully",
-        "student": student
-    }), 201
 
-# ------------------------
-# View Students
-# ------------------------
+        "message":"Student added successfully",
+        "student":student
 
-@app.route("/students")
+    }),201
+
+
+
+# =========================
+# Students GET
+# =========================
+
+@app.route("/students", methods=["GET"])
 def get_students():
 
     return jsonify({
-        "count": len(students),
-        "students": students
-    })
 
-# ------------------------
-# JSON API
-# ------------------------
+        "count":len(students),
+        "students":students
 
-@app.route("/api")
+    }),200
+
+
+
+# =========================
+# JSON API Route
+# =========================
+
+@app.route("/api", methods=["GET"])
 def api():
 
-    with open("data/students.json", "r") as f:
-        data = json.load(f)
+    try:
 
-    return jsonify(data)
+        with open("data/students.json","r") as file:
 
-# ==================================================
-# TODO API
-# ==================================================
+            data=json.load(file)
+
+        return jsonify(data),200
+
+
+    except Exception as e:
+
+        return jsonify({
+
+            "error":str(e)
+
+        }),500
+
+
+
+# =========================
+# TODO POST
+# =========================
 
 @app.route("/submittodoitem", methods=["POST"])
 def submit_todo_item():
 
-    data = request.get_json()
+    data=request.get_json()
+
 
     if not data:
-        return jsonify({
-            "message": "No JSON received"
-        }), 400
 
-    todo = {
+        return jsonify({
+
+            "message":"No JSON data received"
+
+        }),400
+
+
+
+    todo={
+
         "itemName": data.get("itemName"),
+
         "itemDescription": data.get("itemDescription")
+
     }
+
+
 
     result = todo_collection.insert_one(todo)
 
-    return jsonify({
-        "message": "Todo Item Stored Successfully",
-        "id": str(result.inserted_id)
-    }), 201
 
+
+    return jsonify({
+
+        "message":"Todo item stored successfully",
+
+        "id":str(result.inserted_id)
+
+    }),201
+
+
+
+
+# =========================
+# TODO GET
+# =========================
 
 @app.route("/submittodoitem", methods=["GET"])
 def get_todo_items():
 
-    items = list(
+    todos=list(
         todo_collection.find(
             {},
             {
-                "_id": 0
+                "_id":0
             }
         )
     )
 
-    return jsonify(items)
 
-# ------------------------
-# Home
-# ------------------------
+    return jsonify(todos),200
 
-@app.route("/")
+
+
+# =========================
+# Root
+# =========================
+
+@app.route("/", methods=["GET"])
 def home():
 
     return jsonify({
-        "message": "Backend API is running"
+
+        "message":"Backend API is running"
+
     })
 
-if __name__ == "__main__":
+
+
+# =========================
+# Run Application
+# =========================
+
+if __name__=="__main__":
 
     app.run(
         host="0.0.0.0",
